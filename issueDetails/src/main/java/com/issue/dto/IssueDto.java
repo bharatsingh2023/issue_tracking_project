@@ -1,50 +1,23 @@
-package com.issue.entity;
+package com.issue.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+public class IssueDto {
 
-@Entity
-@Table(name = "issue_tracker_issues_tbl")
-public class IssueDetailsEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int issue_id;
+	private String issue_id;
 	private String logged_by;
 	private String logged_On;
 	private String issue_category;
 	private String issue_status;
-	@Lob
-    @Column(columnDefinition = "TEXT")
 	private String description;
 	private String comments;
 	private String fixed_by;
-	private int project_id;
-	
-	
-	public int getProject_id() {
-		return project_id;
-	}
-	public void setProject_id(int project_id) {
-		this.project_id = project_id;
-	}
-	public String getFixed_by() {
-		return fixed_by;
-	}
-	public void setFixed_by(String fixed_by) {
-		this.fixed_by = fixed_by;
-	}
-	public int getIssue_id() {
+	@JsonProperty("projectId")
+	private String project_id;
+	public String getIssue_id() {
 		return issue_id;
 	}
-	public void setIssue_id(int issue_id) {
+	public void setIssue_id(String issue_id) {
 		this.issue_id = issue_id;
 	}
 	public String getLogged_by() {
@@ -83,18 +56,26 @@ public class IssueDetailsEntity {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
-	
-	
+	public String getFixed_by() {
+		return fixed_by;
+	}
+	public void setFixed_by(String fixed_by) {
+		this.fixed_by = fixed_by;
+	}
+	public String getProject_id() {
+		return project_id;
+	}
+	public void setProject_id(String project_id) {
+		this.project_id = project_id;
+	}
 	@Override
 	public String toString() {
-		return "IssueDetailsEntity [issue_id=" + issue_id + ", logged_by=" + logged_by + ", logged_On=" + logged_On
+		return "IssueDto [issue_id=" + issue_id + ", logged_by=" + logged_by + ", logged_On=" + logged_On
 				+ ", issue_category=" + issue_category + ", issue_status=" + issue_status + ", description="
 				+ description + ", comments=" + comments + ", fixed_by=" + fixed_by + ", project_id=" + project_id
 				+ "]";
 	}
-	public IssueDetailsEntity() {
-		// TODO Auto-generated constructor stub
-	}
+	
+	
 	
 }
