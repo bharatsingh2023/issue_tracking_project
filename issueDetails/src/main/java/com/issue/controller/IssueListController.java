@@ -17,7 +17,7 @@ import com.issue.service.IssueCategoryServiceImpl;
 import com.issue.service.IssueListServiceInterface;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" ,allowedHeaders = "*")
 public class IssueListController {
 
 	
