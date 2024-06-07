@@ -28,6 +28,12 @@ public class IssueServiceImpl implements IssueListServiceInterface {
 		}
 		return allissue;
 	}
+
+	@Override
+	public IssueDetailsEntity update(IssueDetailsEntity issue) {
+			
+		return issueDetailsRepo.save(issue);
+	}
 	
 
 	

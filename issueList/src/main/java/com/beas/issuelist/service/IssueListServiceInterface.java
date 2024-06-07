@@ -9,4 +9,8 @@ import com.beas.issuelist.entity.IssueDetailsEntity;
 public interface IssueListServiceInterface {
 
 	List<IssueDetailsEntity> getissuedetails(String projectid, String sortparameter, Sort sort);
+
+	IssueDetailsEntity update(IssueDetailsEntity issue);
+
+	
 }

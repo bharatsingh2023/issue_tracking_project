@@ -29,7 +29,7 @@ public class IssueDetailsEntity {
 	@Column(name = "issue_status")
 	private String issuestatus;
 	@Lob
-    @Column(name = "TEXT")
+    @Column(columnDefinition = "TEXT")
 	private String description;
 	
 	
