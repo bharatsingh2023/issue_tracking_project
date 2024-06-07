@@ -2,6 +2,7 @@ package com.beas.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class VerificationToken {
 
 	    private String token;
 	    
-	    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	    @JoinColumn(nullable = false, name = "user_id")
 	    private User user;
 

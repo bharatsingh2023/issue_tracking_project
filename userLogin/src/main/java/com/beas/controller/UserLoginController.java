@@ -28,7 +28,7 @@ public class UserLoginController {
 	private UserService userService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> SignUp(@RequestBody UserDto userDto) {
+	public ResponseEntity<?> SignUp(@RequestBody UserDto userDto) throws InterruptedException {
 		userService.signUp(userDto);
 		return ResponseEntity.ok("User Signup");
 	}
