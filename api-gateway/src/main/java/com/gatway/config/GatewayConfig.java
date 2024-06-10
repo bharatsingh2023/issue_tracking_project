@@ -18,7 +18,7 @@ public class GatewayConfig {
                 .route("ISSUEDETAILS", r -> r.path("/issueDetails/**")
                         .uri("lb://ISSUEDETAILS"))
                 .route("USERLOGIN", r -> r.path("/userLogin/**")
-                        .uri("lb://ISSUEDETAILS"))
+                        .uri("lb://USERLOGIN"))
                 .build();
     }
 }

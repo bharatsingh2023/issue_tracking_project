@@ -8,6 +8,7 @@ import com.beas.entities.User;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
 	Optional <User> findByUsername(String username);
+	
 
     
 }

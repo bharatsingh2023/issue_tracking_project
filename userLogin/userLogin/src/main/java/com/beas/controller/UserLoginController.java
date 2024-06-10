@@ -33,20 +33,21 @@ public class UserLoginController {
 		return ResponseEntity.ok("email sent");
 	}
 
+
+	@GetMapping("/verify")
+	public void verifyUser(@RequestParam String username, HttpServletResponse response) throws IOException {
+		if (userService.validateToken(username)) {
+			response.sendRedirect("http://localhost:3000/login?verified=true");
+		} else {
+			response.sendRedirect("http://localhost:3000/login?verified=false");
+		}
+	}
+	
+	
 	@GetMapping("/user")
 	public List<User> getUser() {
 		System.out.println("getting users");
 		return userService.getUser();
 	}
-
-	@GetMapping("/verify")
-	public void verifyUser(@RequestParam String username, HttpServletResponse response) throws IOException {
-		if (userService.validateToken(username)) {
-			response.sendRedirect("http://localhost:3000/");
-		} else {
-			response.sendRedirect("http://localhost:3000/login?verified=false");
-		}
-	}
-
 
 }

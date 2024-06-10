@@ -1,16 +1,13 @@
 package com.beas.service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
 import com.beas.dto.UserDto;
 import com.beas.entities.User;
 import com.beas.entities.VerificationToken;
@@ -32,6 +29,7 @@ public class UserService {
 
 		User saved =null;
 		try {
+			 if(userRepo.findByUsername(userDto.getUsername())==null) {		
 			emailService.sendVerificationEmail(userDto.getUsername(), userDto.getUsername());
 			User user = new User();
 			user.setName(userDto.getName());
@@ -40,6 +38,16 @@ public class UserService {
 			user.setCreationDate(String.valueOf(new Date()));
 			user.setVerified(false);
 			saved = userRepo.save(user);
+			 }else {
+				 emailService.sendVerificationEmail(userDto.getUsername(), userDto.getUsername());
+				 User user = userRepo.findByUsername(userDto.getUsername()).get();
+				 user.setName(userDto.getName());
+					user.setUsername(userDto.getUsername());
+					user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+					user.setCreationDate(String.valueOf(new Date()));
+					user.setVerified(false);
+					userRepo.save(user);
+			 }
 		} catch (Exception e) {
 			System.out.println("Email sending error " + e.getMessage());
 		}
@@ -57,7 +65,6 @@ public class UserService {
 	}
 
 	public VerificationToken saveVerificationToken(VerificationToken verificationToken) {
-		// Token expires in 15 minutes
 
 		tokenRepo.save(verificationToken);
 
@@ -78,20 +85,6 @@ public class UserService {
 		return userData != null ? true : false;
 	}
 
-	public static Thread findAThread() {
 
-		ThreadGroup currentGroup = Thread.currentThread().getThreadGroup();
-		int noThreads = currentGroup.activeCount();
-		Thread[] lstThreads = new Thread[noThreads];
-		// Get the threads into the array
-		currentGroup.enumerate(lstThreads);
-
-		for (Thread thread : lstThreads) {
-			if (thread != null && thread.getName().equals("eee")) {
-				return thread;
-			}
-		}
-		return null;
-	}
 
 }
