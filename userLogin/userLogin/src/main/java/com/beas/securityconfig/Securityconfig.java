@@ -21,7 +21,7 @@ private UserDetailServiceimpl userDetailService;
 	SecurityFilterChain securityfilterchain(HttpSecurity httpsecurity) throws Exception {
 		httpsecurity.csrf(c->c.disable())
 				.authorizeHttpRequests(
-						r ->r.requestMatchers("/signup","/signin","/user","/verify").permitAll()
+						r ->r.requestMatchers("/signup","/signin","/user","/verify","/**").permitAll()
 						.anyRequest().authenticated());
 				
 		
