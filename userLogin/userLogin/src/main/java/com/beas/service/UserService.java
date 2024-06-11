@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.beas.dto.UserDto;
 import com.beas.entities.User;
 import com.beas.entities.VerificationToken;
+import com.beas.jwtutil.JwtUtil;
 import com.beas.repository.UserRepo;
 import com.beas.repository.VerificationTokenRepository;
 
@@ -24,6 +25,8 @@ public class UserService {
 	private VerificationTokenRepository tokenRepo;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private JwtUtil jwtUtil;
 
 	public User signUp(UserDto userDto) throws InterruptedException {
 
@@ -86,5 +89,9 @@ public class UserService {
 	}
 
 
+	public String getKey(String username) {
+		return jwtUtil.generateToken(username);
+		
+	}
 
 }
